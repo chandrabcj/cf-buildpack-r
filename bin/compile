@@ -82,21 +82,12 @@ CRAN_MIRROR="http://cran.revolutionanalytics.com"
 
 mkdir -p $CACHE_DIR
 
-echo "in comipleeeeeeeeeeee start"
-
-mkdir unixODBC
-wget https://sourceforge.net/projects/unixodbc/files/unixODBC/2.2.14/unixODBC-2.2.14-linux-x86-64.tar.gz
-gunzip unixODBC-2.2.14-linux-x86-64.tar.gz
-tar -xvf unixODBC-2.2.14-linux-x86-64.tar
-rm unixODBC-2.2.14-linux-x86-64.tar
-
-export PATH=$PATH:/unixODBC/usr/local/bin/
-#RUN export ODBCINI=$HOME/.odbc.ini
-#RUN export ODBCSYSINI=/etc
-export ODBCINI=/etc/odbc.ini
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/unixODBC/usr/local/lib/
-
-echo "in comipleeeeeeeeeeeeeee end"
+curl -L -b "oraclelicense=a" -O http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz
+sudo mkdir /usr/local/oracle-java-10
+sudo tar -zxf jdk-10.0.2_linux-x64_bin.tar.gz -C /usr/local/oracle-java-10
+sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/oracle-java-10/jdk-10.0.2/bin/java" 1500
+sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/local/oracle-java-10/jdk-10.0.2/bin/javac" 1500
+sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/oracle-java-10/jdk-10.0.2/bin/javaws" 1500
 
 # vendor R into the slug
 echo "Vendoring R $R_VERSION" | indent
